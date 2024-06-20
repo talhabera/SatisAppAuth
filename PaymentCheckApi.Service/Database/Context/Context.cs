@@ -4,20 +4,32 @@ namespace PaymentCheckApi.Service.Database;
 
 public sealed class Context : DbContext
 {
-	public Context(DbContextOptions options) : base(options) { }
+    public Context(DbContextOptions options) : base(options) { }
 
-	protected override void OnModelCreating(ModelBuilder builder)
-	{
-		builder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
-	}
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
+    }
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		if (!optionsBuilder.IsConfigured)
-		{
-			const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-			optionsBuilder.UseSqlServer(connectionString);
-		}
-	}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            // Get the connection string
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null);
+            });
+        }
+    }
 }
 

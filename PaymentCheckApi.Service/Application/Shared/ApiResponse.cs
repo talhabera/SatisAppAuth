@@ -37,7 +37,11 @@ public class SuccessfulResponse : ApiResponse
 
 public class ErrorResponse : ApiResponse
 {
-	public ErrorResponse(string message = "", HttpStatusCode resultCode = HttpStatusCode.InternalServerError, object data = null) : base(false, resultCode, string.IsNullOrEmpty(message) ? ErrorMessage : message, string.Empty, data)
+
+    public ErrorResponse(string message = "") : base(true, HttpStatusCode.InternalServerError, string.IsNullOrEmpty(message) ? ErrorMessage : message, string.Empty, null)
+    {
+    }
+    public ErrorResponse(string message = "", HttpStatusCode resultCode = HttpStatusCode.InternalServerError, object data = null) : base(false, resultCode, string.IsNullOrEmpty(message) ? ErrorMessage : message, string.Empty, data)
 	{
 	}
 

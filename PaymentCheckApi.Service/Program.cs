@@ -13,7 +13,15 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 builder.Services.AddDbContext<Context>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+     options.UseSqlServer(
+         builder.Configuration.GetConnectionString("DefaultConnection"),
+         sqlServerOptionsAction: sqlOptions =>
+         {
+             sqlOptions.EnableRetryOnFailure(
+                 maxRetryCount: 5, // The maximum number of retry attempts
+                 maxRetryDelay: TimeSpan.FromSeconds(30), // The maximum delay between retries
+                 errorNumbersToAdd: null); // Additional SQL error numbers to add to the list of transient errors
+         }));
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

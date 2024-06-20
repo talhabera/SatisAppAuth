@@ -18,7 +18,13 @@ public sealed class ContextFactory : IDesignTimeDbContextFactory<Context>
 
 		// Set up DbContext options
 		var optionsBuilder = new DbContextOptionsBuilder<Context>();
-		optionsBuilder.UseSqlServer(connectionString);
+		optionsBuilder.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        });
 
 		return new Context(optionsBuilder.Options);
 	}

@@ -6,10 +6,15 @@ namespace PaymentCheckApi.Service.Application.Service;
 
 	public interface ICustomerService
 	{
-	Task<ApiResponse> GetCustomerById(Guid customerId);
-	Task<ApiResponse> GetAllCustomers();
-	Task<ApiResponse> AddCustomer(AddCustomerModel model);
+	Task<ApiResponse> GetCustomerByGooglePlayAccountAsync(string customerGooglePlayAccount);
+	Task<ApiResponse> GetAllCustomersAsync();
+	Task<ApiResponse> AddCustomerAsync(AddCustomerModel model);
 	//void UpdateCustomer(Guid customerId, UpdateCustomerModel model);
-	Task<ApiResponse> DeleteCustomer(Guid customerId);
+	Task<ApiResponse> DeleteCustomerAsync(string customerGooglePlayAccount);
+	Task<ApiResponse> EditCustomerAsync(EditCustomerModel model);
+
+    Task<ApiResponse> IncreaseCountOfDeviceCustomerAsync(string customerGooglePlayAccount);
+    Task<ApiResponse> GetCountOfDeviceCustomerAsync(string customerGooglePlayAccount);
+    Task<ApiResponse> ReduceCountOfDeviceCustomerAsync(string customerGooglePlayAccount);
 }
 

@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\buildMultiTargeting\PaymentCheckApi.Service.props" />
+  <Import Project="../buildMultiTargeting/PaymentCheckApi.Service.props" />
 </Project>

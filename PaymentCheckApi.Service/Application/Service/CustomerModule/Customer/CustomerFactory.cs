@@ -16,5 +16,15 @@ public class CustomerFactory : ICustomerFactory
 		var customer = model.MappingByConfig<AddCustomerModel, Customer>(configExpression);
 		return customer;
 	}
+
+    public Customer EditCustomerMapping(EditCustomerModel model)
+    {
+        Action<IMapperConfigurationExpression> configExpression = cfg =>
+        {
+            cfg.CreateMap<EditCustomerModel, Customer>();
+        };
+        var customer = model.MappingByConfig<EditCustomerModel, Customer>(configExpression);
+        return customer;
+    }
 }
 

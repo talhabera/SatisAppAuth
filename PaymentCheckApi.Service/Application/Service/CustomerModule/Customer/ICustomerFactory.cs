@@ -6,5 +6,6 @@ namespace PaymentCheckApi.Service.Application.Service;
 	public interface ICustomerFactory
 	{
 		Customer AddCustomerMapping(AddCustomerModel model); 
-	}
+		Customer EditCustomerMapping(EditCustomerModel model);
+}
 
