@@ -175,6 +175,6 @@ F:/PaymentCheck/PaymentCheck/PaymentCheckApi.Service/bin/Debug/net6.0/Scrutor.dl
 /Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/staticwebassets.build.json
 /Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/staticwebassets.development.json
 /Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/scopedcss/bundle/PaymentCheckApi.Service.styles.css
-/Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/PaymentCheckApi.Service.csproj.CopyComplete
 /Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/PaymentCheckApi.Service.genruntimeconfig.cache
 /Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/ref/PaymentCheckApi.Service.dll
+/Users/bfadiguzel/work/FreeLance/SatisAppAuth/PaymentCheckApi.Service/obj/Debug/net6.0/PaymentCheckApi.Service.csproj.CopyComplete

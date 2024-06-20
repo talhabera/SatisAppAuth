@@ -136,10 +136,15 @@ namespace PaymentCheckApi.Service.Application.Service
 
                 var customer = await _customerRepository.Queryable.FirstOrDefaultAsync(s => s.GooglePlayAccount == customerGooglePlayAccount);
 
-                if (!(customer.CountOfConnectedDevices >= 0))
-                    return new ErrorResponse("CountOfDevice is already 0");
+                if (customer == null)
+                    return new ErrorResponse("Customer not found");
 
-                customer.CountOfConnectedDevices = customer.CountOfConnectedDevices - 1;
+                if (customer.CountOfConnectedDevices <= 0)
+                    return new ErrorResponse("CountOfDevice is already 0 or less");
+
+                // Decrement the count only if it's greater than zero
+                customer.CountOfConnectedDevices = Math.Max(0, customer.CountOfConnectedDevices - 1);
+
                 await _customerRepository.UpdateAsync(customer);
                 await _unitOfWork.SaveChangesAsync();
 
@@ -150,5 +155,55 @@ namespace PaymentCheckApi.Service.Application.Service
                 throw new Exception(exp.Message);
             }
         }
+
+        public async Task<ApiResponse> SetAsSubscribedAsync(string customerGooglePlayAccount)
+        {
+            try
+            {
+                var customer = await _customerRepository.Queryable.FirstOrDefaultAsync(s => s.GooglePlayAccount == customerGooglePlayAccount);
+                customer.IsSubscribed = true;
+                await _customerRepository.UpdateAsync(customer);
+                await _unitOfWork.SaveChangesAsync();
+
+                return new SuccessfulResponse(customer.Id);
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message);
+            }
+        }
+
+        public async Task<ApiResponse> SetAsUnSubscribedAsync(string customerGooglePlayAccount)
+        {
+            try
+            {
+                var customer = await _customerRepository.Queryable.FirstOrDefaultAsync(s => s.GooglePlayAccount == customerGooglePlayAccount);
+                customer.IsSubscribed = false;
+                await _customerRepository.UpdateAsync(customer);
+                await _unitOfWork.SaveChangesAsync();
+
+                return new SuccessfulResponse(customer.Id);
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message);
+            }
+        }
+
+        public async Task<ApiResponse> GetIsSubscribedAsync(string customerGooglePlayAccount)
+        {
+            try
+            {
+                var customer = await _customerRepository.Queryable.FirstOrDefaultAsync(s => s.GooglePlayAccount == customerGooglePlayAccount);
+
+                return new SuccessfulResponse(customer.IsSubscribed);
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message);
+            }
+        }
+
+
     }
 }

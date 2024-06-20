@@ -16,5 +16,9 @@ namespace PaymentCheckApi.Service.Application.Service;
     Task<ApiResponse> IncreaseCountOfDeviceCustomerAsync(string customerGooglePlayAccount);
     Task<ApiResponse> GetCountOfDeviceCustomerAsync(string customerGooglePlayAccount);
     Task<ApiResponse> ReduceCountOfDeviceCustomerAsync(string customerGooglePlayAccount);
+
+    Task<ApiResponse> SetAsSubscribedAsync(string customerGooglePlayAccount);
+    Task<ApiResponse> SetAsUnSubscribedAsync(string customerGooglePlayAccount);
+    Task<ApiResponse> GetIsSubscribedAsync(string customerGooglePlayAccount);
 }
 
