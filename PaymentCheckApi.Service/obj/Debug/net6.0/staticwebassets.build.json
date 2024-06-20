@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "4mUktssoJ4tAXNO0dm+QvcSFBZ3C2EwWy14WLfODkRw=",
+  "Source": "PaymentCheckApi.Service",
+  "BasePath": "_content/PaymentCheckApi.Service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
